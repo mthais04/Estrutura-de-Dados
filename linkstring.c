@@ -33,7 +33,7 @@ void CreateList(List *buffer){
 	buffer->currentpos = -1;
 }
 
-void ReadList(List *buffer){
+void ReadFile(List *buffer){
 	char line[MAXLINE];
 	Boolean proceed = TRUE;
 	
@@ -81,6 +81,76 @@ void FindString(List *buffer){
 		}
 	}
 }
+
+void InsertLine(List *buffer){
+
+	int newline;
+	char line[MAXLINE];
+
+	if(ListFull(buffer))
+		Error("Buffer está cheio; nenhuma inserção possível.");
+
+	else{
+		printf("Onde você quer inserir uma nova linha? ");
+		scanf("%d", &newline);
+		if(newline < 0 || newline > ListSize(buffer)){
+			printf("Essa linha não existe.");
+		}
+		else{
+			printf("|: ");
+			fflush(stdin);
+			fgets(line,MAXLINE,stdin);
+			InsertList(newline,line,buffer);
+		}
+	}
+}
+
+void ChangeString(List *buffer)
+{
+	int n, len;
+	char *s, rep[MAXLINE], text[MAXLINE], temp[MAXLINE];
+	printf("Qual linha para mudar? ");
+	scanf("%d", &n); //colocar o numero da linha
+	if(n < 0 || n >= ListSize(buffer))
+		printf("Nenhuma linha a processar.");
+	else{
+		SetPosition(n, buffer);
+		printf("Texto a substituir? ");
+		fflush(stdin);
+		fgets(text, MAXLINE, stdin); //introduza o alvo
+		text[strlen(text) - 1] = '\0'; //solta o caracter na nova linha
+		if((s = strstr(buffer->current->entry, text)) == NULL)
+			printf("String não encontrada.");
+		else{
+			printf("Substituição de texto? ");
+			fflush(stdin);
+			fgets(rep, MAXLINE, stdin); //introduz a substituição
+			rep[strlen(rep) - 1] = '\0';
+			len = s - buffer->current->entry;
+			strncpy(temp, buffer->current->entry, len);
+			temp[len]= '\0';
+			strcat(temp, rep);
+			strcat(temp, buffer->current->entry + len +strlen(text));
+			free(buffer->current->entry);
+			buffer->current->entry = malloc(strlen(temp) + 1);
+			strcpy(buffer->current->entry, temp);
+		}
+	}
+}
+
+void WriteFile(List *buffer)
+{
+	List *fpi;
+	fpi = fopen("arquivo.txt", "w");
+	char frase[MAXLINE];
+	printf("Entre com a string a ser gravada no arquivo: ");
+	fgets(frase, MAXLINE, stdin);
+	fprintf(fpi, "%s\0", frase);
+	fclose(fpi);
+	return 0;
+}
+
+	
 		
 
 /*
