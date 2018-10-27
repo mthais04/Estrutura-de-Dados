@@ -129,9 +129,7 @@ void DoCommand(char command, List *buffer){
 	 	break;
 	   case 'p':
 	 	PrecedingLine(buffer);
-	 	break;
-	   case 'q':
-		break;*/
+	 	break;*/	   
 	   case 'r':
 	 	ReadFile(buffer);
 	 	break;
@@ -144,6 +142,8 @@ void DoCommand(char command, List *buffer){
 	   case 'w':
 	 	WriteFile(buffer);
 	 	break;
+	   case 'q':
+		exit(0);
    default:
       printf("Não faz nada.\n");
 	}
