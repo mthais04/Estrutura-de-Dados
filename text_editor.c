@@ -129,10 +129,9 @@ void DoCommand(char command, List *buffer){
 	 	break;
 	   case 'p':
 	 	PrecedingLine(buffer);
-	 	break;*/
-	   case 'q':
-		  	exit(0);
 	 	break;
+	   case 'q':
+		break;*/
 	   case 'r':
 	 	ReadFile(buffer);
 	 	break;
