@@ -28,8 +28,12 @@ inicialização
 */
 
 void CreateList(List *buffer);
-void ReadList(List *buffer);
+void ReadFile(List *buffer);
 void FindString(List *buffer);
+void ChangeString(List *buffer);
+void InsertLine(List *buffer);
+void WriteFile(List *buffer);
+
 
 /*
 reinicialização
