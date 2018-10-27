@@ -1,4 +1,5 @@
 // compilar: gcc text_editor.c linkstring.c common.c -o text_editor.bin
+//após executar o comando acima, escrever no terminal " ./text_editor.bin arquivo.txt "
 
 /* Double Linked List Driver
 Pré: Nenhuma.
@@ -97,30 +98,30 @@ void DoCommand(char command, List *buffer){
 	switch(command){
 	  /* case 'b':
 	 	GoToBeginning(buffer);
-	 	break;
+	 	break;*/
 	   case 'c':
 	 	ChangeString(buffer);
 	 	break;
-	   case 'd':
+	 /*  case 'd':
 	  	DeleteLine(buffer);
 	 	break;
-	   case 'e':
-	 	GoToEnd(buffer);
+	   case 'e': 
+		GoToEndBuffer(buffer);
 	 	break;*/
 	   case 'f':
 	 	FindString(buffer);
 	 	break;
-	  /* case 'g':
+	   /*case 'g':
 	 	GoToLine(buffer);
 	 	break;
 	   case '?':
 	   case 'h':
 	 	Help();
-	 	break;
+	 	break;*/
 	   case 'i':
 	 	InsertLine(buffer);
 	 	break;
-	   case 'l':
+	   /*case 'l':
 	 	Length(buffer);
 	 	break;
 	   case 'n':
@@ -128,21 +129,22 @@ void DoCommand(char command, List *buffer){
 	 	break;
 	   case 'p':
 	 	PrecedingLine(buffer);
-	 	break;
-	   case 'q':
 	 	break;*/
+	   case 'q':
+		  	exit(0);
+	 	break;
 	   case 'r':
-	 	ReadList(buffer);
+	 	ReadFile(buffer);
 	 	break;
 	   /*case 's':
 	 	SubstituteLine(buffer);
 	 	break;
 	   case 'v':
 	 	ViewBuffer(buffer);
-	 	break;
+	 	break;*/
 	   case 'w':
 	 	WriteFile(buffer);
-	 	break;*/
+	 	break;
    default:
       printf("Não faz nada.\n");
 	}
@@ -160,7 +162,7 @@ void OpenFiles(int argc, char *argv[], List *buffer) {
    if((buffer->fpi = fopen(argv[1], "r+")) == NULL)
 	buffer->fpi = fopen(argv[1], "w+");
    else
-       ReadList(buffer);
+       ReadFile(buffer);
    //recuperar o conteúdo do arquivo e colocar no buffer
    printf("Conteúdo do arquivo %s carregado.\n", argv[1]);
 }
